@@ -1,249 +1,116 @@
-function registro() {
+/**
+ * script de JavaScript para el formulario de la tabla Car
+ */
+
+function insertarRegistroCar() {
   var elemento = {
-    id: $("#id").val(),
+    id: $("#idCar").val(),
     brand: $("#brand").val(),
     model: $("#model").val(),
     category_id: $("#category_id").val()
   }
-  // var dataToSend = JSON.stringify(elemento);
-  // console.log('data: ' + elemento)
-  //JSON= JavaScript Object Notation
-  $.post({
+  var dataTosend = JSON.stringify(elemento);
+  // JSON = JavaScript Object Notation
+  $.ajax({
     dataType: 'json',
     data: elemento,
-    url: "https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/car/car",
+    url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/car/car',
     type: 'POST',
+    //contentType:'application/json',
     success: function (response) {
+      alert("exitoso")
       console.log(response);
     },
     error: function (jqXHR, textStatus, errorThrown) {
-
     }
   });
 }
 
-function obtenerItems() {
+function obtenerRegistrosCar() {
   $.ajax({
     dataType: 'json',
-    url: "https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/car/car",
+    url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/car/car',
     type: 'GET',
     success: function (response) {
-      var misItems = response.items;
-      for (i = 0; i < misItems.length; i++) {
-        $("#miResultado").append("<tr>");
-        $("#miResultado").append("<td>" + misItems[i].brand + "</td>");
-        $("#miResultado").append("<td>" + misItems[i].model + "</td>");
-        $("#miResultado").append("<td>" + misItems[i].category_id + "</td>");
-        $("#miResultado").append('<td><button onclick="borrar(' + misItems[i].id + ')">Borrar</button></td>');
-        $("#miResultado").append('<td><button onclick="obtenerItemEspecifico(' + misItems[i].id + ')">Cargar</button></td>');
-        $("#miResultado").append("</tr>");
+      var registrosCar = response.items;
+      for (i = 0; i < registrosCar.length; i++) {
+        $("#registrosCar").append("<tr>");
+        $("#registrosCar").append("<td>" + registrosCar[i].id + "</td>");
+        $("#registrosCar").append("<td>" + registrosCar[i].brand + "</td>");
+        $("#registrosCar").append("<td>" + registrosCar[i].model + "</td>");
+        $("#registrosCar").append("<td>" + registrosCar[i].category_id + "</td>");
+        $("#registrosCar").append('<td><button onclick="borrarRegistroCar(' + registrosCar[i].id + ')">DELETE</button>' + '</td>');
+        $("#registrosCar").append('<td><button onclick="obtenerRegistroEspecificoCar(' + registrosCar[i].id + ')">GET</button>' + '</td>');
+        $("#registrosCar").append("</tr>");
       }
+      //$("#miResultado").append(response.items[0].brand,response.items[0].model);
     },
     error: function (jqXHR, textStatus, errorThrown) {
     }
   });
-
 }
 
-
-function borrar(idElemento) {
+function borrarRegistroCar(idElemento) {
   var elemento = {
     id: idElemento
   };
-  var dataToSend = JSON.stringify(elemento);
-  //JSON= JavaScript Object Notation
+  var dataTosend = JSON.stringify(elemento);
+  //JSON = JavaScript Object Notation
   $.ajax({
     dataType: 'json',
-    data: dataToSend,
-    url: "https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/car/car",
+    data: dataTosend,
+    url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/car/car',
     type: 'DELETE',
     contentType: 'application/json',
     success: function (response) {
-      $("#miResultado").empty();
-      obtenerItems();
-      console.log("Borrado con exito")
+      console.log(response);
     },
     error: function (jqXHR, textStatus, errorThrown) {
     }
   });
 }
 
-
-function obtenerItemEspecifico(idItem) {
+function obtenerRegistroEspecificoCar(idItem) {
   $.ajax({
     dataType: 'json',
-    url: "https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/car/car/" + idItem,
+    url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/car/car/' + idItem,
     type: 'GET',
     success: function (response) {
       console.log(response);
-      var item = response.items[0];
-      $("#id").val(item.id);
-      $("#brand").val(item.brand);
-      $("#model").val(item.model);
-      $("#category_id").val(item.category_id);
+      var registrosCar = response.items[0];
+      $("#idCar").val(registrosCar.id);
+      $("#brand").val(registrosCar.brand);
+      $("#model").val(registrosCar.model);
+      $("#category_id").val(registrosCar.category_id);
     },
     error: function (jqXHR, textStatus, errorThrown) {
     }
   });
-
 }
 
-function actualizar() {
+function actualizarRegistroCar() {
+
   var elemento = {
-    id: parseInt($("#id").val()),
+    id: $("#idCar").val(),
     brand: $("#brand").val(),
-    model: parseInt($("#model").val()),
-    category_id: parseInt($("#category_id").val())
+    model: $("#model").val(),
+    category_id: $("#category_id").val()
   }
-  var dataToSend = JSON.stringify(elemento);
-  //JSON= JavaScript Object Notation
+
+  var dataTosend = JSON.stringify(elemento)
+  //JSON = JavaScript Object Notation
+
   $.ajax({
+
     dataType: 'json',
-    data: dataToSend,
+    data: dataTosend,
     contentType: 'application/json',
     url: "https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/car/car",
     type: 'PUT',
-    success: function () {
-      // $("#miResultado").empty();
-      obtenerItems();
-      console.log("Peticion realizada")
+    success: function (response) {
+      console.log(response);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
     }
-    // error: function (jqXHR, textStatus, errorThrown) {
-    //   console.log(jqXHR)
-    //   console.log(textStatus)
-    //   console.log(errorThrown)
-    // }
   });
-
 }
-
-// /*<!-- --- --- --- -->
-// <!-- Inicio de funcion que me muestra los datos-->*/
-
-// //metodo que habilita los CORS  a true para poder mostrar los datos
-// var elemento = {
-//   id: $("#miId").val(),
-//   name: $("#name").val(),
-//   description: $("#description").val(),
-//   price: $("#price").val()
-// }
-// var dataToSend = JSON.stringify(elemento);
-// function traerInformacion() {
-//   $.ajax({
-//     url: "https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/car1/car1",
-//     type: "GET", //tipo de consulta
-//     dataType: "JSON", //tipo de dato 
-//     success: function (respuesta) {
-//       console.log(respuesta);
-//       pintarRespuesta(respuesta.items)
-//       // ciclo que recorre los items que devuelve la peticion GET
-//       // for (i = 0; i < respuesta.items.length; i++) {
-//       //   //$("#resultado").append(respuesta.items[i].id + "<br>");
-//       // }
-//     }
-//   });
-// }
-
-// /*<!-- Fin de  funcion que me muestra los datos--- -->
-// <!-- --- --- --- -->*/
-
-// /*<!-- --- --- --- -->
-// <!-- Inicio de guardar informacion POST-->*/
-// function guardarInfo() {
-//   var myData = {
-//     id: $("#id").val(),
-//     brand: $("#brand").val(),
-//     model: $("#model").val(),
-//     category_id: $("#category_id").val(),
-//   };
-//   var dataToSend = JSON.stringify(myData);
-//   $.ajax({
-//     url: "https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/car1/car1",
-//     type: "POST", //tipo de consulta
-//     data: myData,
-//     dataType: 'JSON', //tipo de dato
-//     // contentType: 'application/json',
-//     success: function (response) {
-//       traerInformacion();
-//       console.log("Guardado exitosamente" + response)
-//     }, error: function (jqXHR, textStatus, errorThrown) {
-//       console.log(textStatus)
-//       console.log(errorThrown)
-//     }
-//   })
-// }
-// /*<!-- Fin de  guardar informacion POST--- -->
-// <!-- --- --- --- -->*/
-
-// /*<!-- --- --- --- -->
-// <!-- Inicio de actualizar datos PUT-->*/
-// function actualizarInfo() {
-//   let myData = {
-//     id: $("#id").val(),
-//     brand: $("#brand").val(),
-//     model: $("#model").val(),
-//     category_id: $("#category_id").val(),
-//   };
-//   let dataToSend = JSON.stringify(myData);
-//   $.ajax({
-//     url: "https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/car1/car1",
-//     type: "PUT", //tipo de consulta
-//     data: dataToSend,
-//     dataType: "JSON", //tipo de dato
-//     contentType: "application/json",
-//     success: function () {
-//       $("#resultado").empty();
-//       $("#id").val("");
-//       $("#brand").val("");
-//       $("#model").val("");
-//       $("#category_id").val("");
-//       traerInformacion();
-//       alert("Peticion realizada")
-//     }
-//   });
-// }
-// /*<!-- Fin de  actualizar datos--- -->
-// <!-- --- --- --- -->*/
-
-
-
-// /*<!-- --- --- --- -->
-// <!-- Inicio de pintar respuestas-->*/
-// function pintarRespuesta(items) {
-//   //definicion de la etiqueta table
-//   let mitablero = "<table>";
-//   for (i = 0; i < items.length; i++) {
-//     mitablero += "<tr>";
-//     mitablero += "<td>" + items[i].id + "</td>";
-//     mitablero += "<td>" + items[i].brand + "</td>";
-//     mitablero += "<td>" + items[i].model + "</td>";
-//     mitablero += "<td>" + items[i].category_id + "</td>";
-//     mitablero += "<td> <button onclick='borrarElemento(" + items[i].id + ")'>Borrar</button>";
-//     mitablero += "</tr>";
-//   }
-//   mitablero += "</table>";
-//   $("#resultado").append(mitablero)
-// }
-// /*<!-- Fin de  pintar respuestas--- -->
-// <!-- --- --- --- -->*/
-
-
-
-// function borrarElemento(idElemento) {
-//   let myData = {
-//     id: idElemento
-//   };
-//   let dataToSend = JSON.stringify(myData);
-//   $.ajax({
-//     url: "https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/car1/car1",
-//     type: "DELETE", //tipo de consulta
-//     data: dataToSend,
-//     dataType: "JSON", //tipo de dato
-//     contentType: "application/JSON",
-//     success: function (respuesta) {
-//       $("#resultado").empty();
-//       traerInformacion();
-//       alert("Borrado con exito")
-//     }
-//   });
-// }

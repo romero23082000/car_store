@@ -20,19 +20,19 @@
 <body>
 
   <h1>Carro</h1>
-  <input type="number" id="id" placeholder="Id">
+  <input type="number" id="idCar" placeholder="Id">
   <input type="text" id="brand" placeholder="Marca">
   <input type="number" id="model" placeholder="modelo">
-  <input type="number" id="category_id" placeholder="category_id">
+  <input type="number" id="category_id" placeholder="categoria">
 
 
-  <button onclick="registro()">ok</button>
-  <button onclick="obtenerItems()">VER</button>
-  <button onclick="actualizar()">Editar</button>
+  <button onclick="insertarRegistroCar()">POST</button>
+  <button onclick="obtenerRegistrosCar()">GET</button>
+  <button onclick="actualizarRegistroCar()">PUT</button>
 
   <div>
     <table>
-      <tbody id="miResultado">
+      <tbody id="registrosCar">
 
       </tbody>
     </table>
