@@ -49,8 +49,8 @@ function obtenerItemsClient() {
         $("#registrosClient").append("<td>" + registrosClient[i].name + "</td>");
         $("#registrosClient").append("<td>" + registrosClient[i].email + "</td>");
         $("#registrosClient").append("<td>" + registrosClient[i].age + "</td>");
-        $("#registrosClient").append('<td> <button onclick="borrarRegistroClient(' + registrosClient[i].id + ')">DELETE</button>' + '</td>');
-        $("#registrosClient").append('<td> <button onclick="obtenerRegistroEspecificoClient(' + registrosClient[i].id + ')">GET</button>' + '</td>');
+        $("#registrosClient").append('<td> <button class="btn btn-danger" onclick="borrarRegistroClient(' + registrosClient[i].id + ')">DELETE</button>' + '</td>');
+        $("#registrosClient").append('<td> <button class="btn btn-info" onclick="obtenerRegistroEspecificoClient(' + registrosClient[i].id + ')">GET</button>' + '</td>');
         $("#registrosClient").append("</tr>");
 
       }

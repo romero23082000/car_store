@@ -46,8 +46,8 @@ function obtenerItemsMessage() {
         $("#registrosMessage").append("<tr>");
         $("#registrosMessage").append("<td>" + registrosMessage[i].id + "</td>");
         $("#registrosMessage").append("<td>" + registrosMessage[i].messagetext + "</td>");
-        $("#registrosMessage").append('<td> <button onclick="borrarMessage(' + registrosMessage[i].id + ')">DELETE</button>' + '</td>');
-        $("#registrosMessage").append('<td> <button onclick="obtenerRegistroEspecificoMessage(' + registrosMessage[i].id + ')">GET</button>' + '</td>');
+        $("#registrosMessage").append('<td> <button class="btn btn-danger" onclick="borrarMessage(' + registrosMessage[i].id + ')">DELETE</button>' + '</td>');
+        $("#registrosMessage").append('<td> <button class="btn btn-info" onclick="obtenerRegistroEspecificoMessage(' + registrosMessage[i].id + ')">GET</button>' + '</td>');
         $("#registrosMessage").append("</tr>");
 
       }

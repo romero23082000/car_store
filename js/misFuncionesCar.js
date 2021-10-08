@@ -39,8 +39,8 @@ function obtenerRegistrosCar() {
         $("#registrosCar").append("<td>" + registrosCar[i].brand + "</td>");
         $("#registrosCar").append("<td>" + registrosCar[i].model + "</td>");
         $("#registrosCar").append("<td>" + registrosCar[i].category_id + "</td>");
-        $("#registrosCar").append('<td><button onclick="borrarRegistroCar(' + registrosCar[i].id + ')">DELETE</button>' + '</td>');
-        $("#registrosCar").append('<td><button onclick="obtenerRegistroEspecificoCar(' + registrosCar[i].id + ')">GET</button>' + '</td>');
+        $("#registrosCar").append('<td><button class="btn btn-danger" onclick="borrarRegistroCar(' + registrosCar[i].id + ')">DELETE</button>' + '</td>');
+        $("#registrosCar").append('<td><button class="btn btn-info" onclick="obtenerRegistroEspecificoCar(' + registrosCar[i].id + ')">GET</button>' + '</td>');
         $("#registrosCar").append("</tr>");
       }
       //$("#miResultado").append(response.items[0].brand,response.items[0].model);
