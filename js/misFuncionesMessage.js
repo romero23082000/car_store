@@ -12,7 +12,7 @@ function registroMessage() {
 
     dataType: 'json',
     data: elemento,
-    url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/message//message/',
+    url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/message/message',
     type: 'POST',
     //contentType:'application/json',
     success: function (response) {
@@ -34,7 +34,7 @@ function obtenerItemsMessage() {
   $.ajax({
 
     dataType: 'json',
-    url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/message//message/',
+    url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/message/message',
     type: 'GET',
 
     success: function (response) {
@@ -74,7 +74,7 @@ function borrarMessage(idElemento) {
 
     dataType: 'json',
     data: dataToSend,
-    url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/message//message/',
+    url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/message/message',
     type: 'DELETE',
     contentType: 'application/json',
 
@@ -129,7 +129,7 @@ function actualizarMessage() {
     dataType: 'json',
     data: dataTosend,
     contentType: 'application/json',
-    url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/message//message/',
+    url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/message/message',
     type: 'PUT',
     success: function (response) {
       console.log(response);
