@@ -2,24 +2,21 @@ package co.usa.ciclo3.ciclo3.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table(name = "car")
-public class Car implements Serializable {
+@Table(name = "gama")
+public class Gama implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private String brand;
-    private Integer age;
     private String description;
-    @ManyToOne
-    @JoinColumn(name = "gamaId")
-    @JsonIgnoreProperties("cars")
-    private Gama gama;
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "gama")
+    @JsonIgnoreProperties("gama")
+    private List<Car> cars;
 
     public Integer getId() {
         return id;
@@ -37,22 +34,6 @@ public class Car implements Serializable {
         this.name = name;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -61,11 +42,11 @@ public class Car implements Serializable {
         this.description = description;
     }
 
-    public Gama getGama() {
-        return gama;
+    public List<Car> getCars() {
+        return cars;
     }
 
-    public void setGama(Gama gama) {
-        this.gama = gama;
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
     }
 }
