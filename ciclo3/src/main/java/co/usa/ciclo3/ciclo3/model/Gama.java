@@ -14,6 +14,7 @@ public class Gama implements Serializable {
     private Integer id;
     private String name;
     private String description;
+
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "gama")
     @JsonIgnoreProperties("gama")
     private List<Car> cars;

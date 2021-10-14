@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Calendar;
 
 @Entity
 @Table(name = "car")
@@ -17,9 +18,13 @@ public class Car implements Serializable {
     private Integer age;
     private String description;
     @ManyToOne
-    @JoinColumn(name = "gamaId")
+    @JoinColumn(name = "gamaid")
     @JsonIgnoreProperties("cars")
     private Gama gama;
+    @ManyToOne
+    @JoinColumn(name = "messageId")
+    @JsonIgnoreProperties("cars")
+    private Message message;
 
     public Integer getId() {
         return id;
@@ -67,5 +72,13 @@ public class Car implements Serializable {
 
     public void setGama(Gama gama) {
         this.gama = gama;
+    }
+
+    public Message getMessage() {
+        return message;
+    }
+
+    public void setMessage(Message message) {
+        this.message = message;
     }
 }
