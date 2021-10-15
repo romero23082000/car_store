@@ -11,7 +11,7 @@ import java.util.List;
 public class Gama implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idGama;
     private String name;
     private String description;
 
@@ -19,12 +19,12 @@ public class Gama implements Serializable {
     @JsonIgnoreProperties("gama")
     private List<Car> car;
 
-    public Integer getId() {
-        return id;
+    public Integer getIdGama() {
+        return idGama;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdGama(Integer idGama) {
+        this.idGama = idGama;
     }
 
     public String getName() {
@@ -48,6 +48,14 @@ public class Gama implements Serializable {
     }
 
     public void setCars(List<Car> cars) {
+        this.car = car;
+    }
+
+    public List<Car> getCar() {
+        return car;
+    }
+
+    public void setCar(List<Car> car) {
         this.car = car;
     }
 }
