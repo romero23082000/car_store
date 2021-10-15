@@ -5,7 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.List;
+
 
 @Entity
 @Table(name = "car")
@@ -17,14 +18,24 @@ public class Car implements Serializable {
     private String brand;
     private Integer age;
     private String description;
+
     @ManyToOne
-    @JoinColumn(name = "gamaid")
-    @JsonIgnoreProperties("cars")
+    @JoinColumn(name = "idGama")
+    @JsonIgnoreProperties({"car","gama"})
     private Gama gama;
-    @ManyToOne
-    @JoinColumn(name = "messageId")
-    @JsonIgnoreProperties("cars")
-    private Message message;
+
+    //El  many hace referencia a la clase car y el one hace referencia a la otra tabla en este caso message
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "car")
+    @JsonIgnoreProperties({"car","client"})
+    private List<Message> message;
+
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "car")
+    @JsonIgnoreProperties({"car","message"})
+    private List<Reservation> reservations;
+
+
+
+
 
     public Integer getId() {
         return id;
@@ -74,11 +85,20 @@ public class Car implements Serializable {
         this.gama = gama;
     }
 
-    public Message getMessage() {
+    public List<Message> getMessage() {
         return message;
     }
 
-    public void setMessage(Message message) {
+    public void setMessage(List<Message> message) {
         this.message = message;
     }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
 }

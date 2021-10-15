@@ -1,6 +1,6 @@
 package co.usa.ciclo3.ciclo3.repository;
 
-import co.usa.ciclo3.ciclo3.model.Car;
+
 import co.usa.ciclo3.ciclo3.model.Gama;
 import co.usa.ciclo3.ciclo3.repository.crud.GamaCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;

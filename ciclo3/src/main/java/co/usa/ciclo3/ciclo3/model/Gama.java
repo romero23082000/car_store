@@ -17,7 +17,7 @@ public class Gama implements Serializable {
 
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "gama")
     @JsonIgnoreProperties("gama")
-    private List<Car> cars;
+    private List<Car> car;
 
     public Integer getId() {
         return id;
@@ -44,10 +44,10 @@ public class Gama implements Serializable {
     }
 
     public List<Car> getCars() {
-        return cars;
+        return car;
     }
 
     public void setCars(List<Car> cars) {
-        this.cars = cars;
+        this.car = car;
     }
 }
