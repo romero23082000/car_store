@@ -1,33 +1,40 @@
 package co.usa.ciclo3.ciclo3.service;
 
 import co.usa.ciclo3.ciclo3.model.Client;
-import co.usa.ciclo3.ciclo3.repository.ClientRespository;
+import co.usa.ciclo3.ciclo3.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClientService implements Serializable {
+public class ClientService {
+
     @Autowired
-    private ClientRespository clientRespository;
+    private ClientRepository clientRepository;
+
     public List<Client> getAll(){
-        return clientRespository.getAll();
+        return clientRepository.getAll();
     }
+
     public Optional<Client> getClient(int id){
-        return clientRespository.getClient(id);
+        return clientRepository.getClient(id);
     }
-    public Client save(Client cli){
-        if(cli.getId()==null){
-            return clientRespository.save(cli);
-        }else{
-            Optional<Client> cliaux=clientRespository.getClient(cli.getId());
-            if(cliaux.isEmpty()){
-                return clientRespository.save(cli);
-            }else{
-                return cli;
+
+    public Client save(Client cliente){
+
+        if(cliente.getIdClient() == null){
+            return clientRepository.save(cliente);
+        }
+        else{
+            Optional<Client> varTmp = clientRepository.getClient(cliente.getIdClient());
+            if(varTmp.isPresent()){
+                return cliente;
+            }
+            else{
+                return clientRepository.save(cliente);
             }
         }
     }

@@ -8,21 +8,27 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "message")
-public class Message implements Serializable {
+@Table(name = "Message")
+public class Message implements Serializable{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMessage;
-    private String text;
+    private String messageText;
+
+
+
     @ManyToOne
     @JoinColumn(name = "idCar")
-    @JsonIgnoreProperties({"messages","reservations"})
+    @JsonIgnoreProperties({"messages" , "reservations"})
     private Car car;
+
 
     @ManyToOne
     @JoinColumn(name = "idClient")
-    @JsonIgnoreProperties({"messages","reservations"})
+    @JsonIgnoreProperties({"messages" , "reservations"})
     private Client client;
+
 
 
     public Integer getIdMessage() {
@@ -33,12 +39,12 @@ public class Message implements Serializable {
         this.idMessage = idMessage;
     }
 
-    public String getText() {
-        return text;
+    public String getMessageText() {
+        return messageText;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
     }
 
     public Car getCar() {
@@ -56,5 +62,9 @@ public class Message implements Serializable {
     public void setClient(Client client) {
         this.client = client;
     }
+
+
+
+
 
 }

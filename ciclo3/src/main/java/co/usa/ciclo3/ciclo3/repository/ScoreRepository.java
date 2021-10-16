@@ -11,10 +11,20 @@ import java.util.Optional;
 
 @Repository
 public class ScoreRepository {
+
     @Autowired
     private ScoreCrudRepository scoreCrudRepository;
 
-    public List<Score> getAll(){return (List<Score>)scoreCrudRepository.findAll();}
-    public Optional<Score> getScore(int id){return scoreCrudRepository.findById(id);}
-    public Score save(Score s){return scoreCrudRepository.save(s);}
+    public List<Score> getAll(){
+        return (List<Score>) scoreCrudRepository.findAll();
+    }
+
+    public Optional<Score> getScore(int id){
+
+        return scoreCrudRepository.findById(id);
+    }
+
+    public Score save(Score calificacion){
+        return scoreCrudRepository.save(calificacion);
+    }
 }
