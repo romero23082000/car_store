@@ -49,5 +49,4 @@ public class Score implements Serializable{
     public void setReservation(Reservation reservation) {
         this.reservation = reservation;
     }
-
 }
