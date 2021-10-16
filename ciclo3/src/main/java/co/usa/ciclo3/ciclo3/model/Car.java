@@ -13,36 +13,36 @@ import java.util.List;
 public class Car implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idCar;
     private String name;
     private String brand;
-    private Integer age;
+    private Integer year;
     private String description;
 
     @ManyToOne
     @JoinColumn(name = "idGama")
-    @JsonIgnoreProperties({"car","gama"})
+    @JsonIgnoreProperties({"cars","gama"})
     private Gama gama;
 
     //El  many hace referencia a la clase car y el one hace referencia a la otra tabla en este caso message
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "car")
     @JsonIgnoreProperties({"car","client"})
-    private List<Message> message;
+    private List<Message> messages;
 
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "car")
-    @JsonIgnoreProperties({"car","message"})
+    @JsonIgnoreProperties({"car","client"})
     private List<Reservation> reservations;
 
 
 
 
 
-    public Integer getId() {
-        return id;
+    public Integer getIdCar() {
+        return idCar;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdCar(Integer idCar) {
+        this.idCar = idCar;
     }
 
     public String getName() {
@@ -61,12 +61,12 @@ public class Car implements Serializable {
         this.brand = brand;
     }
 
-    public Integer getAge() {
-        return age;
+    public Integer getYear() {
+        return year;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
     public String getDescription() {
@@ -86,11 +86,11 @@ public class Car implements Serializable {
     }
 
     public List<Message> getMessage() {
-        return message;
+        return messages;
     }
 
     public void setMessage(List<Message> message) {
-        this.message = message;
+        this.messages = messages;
     }
 
     public List<Reservation> getReservations() {

@@ -21,10 +21,10 @@ public class CarService implements Serializable {
         return carRepository.getCar(id);
     }
     public Car save(Car c){
-        if(c.getId()==null){
+        if(c.getIdCar()==null){
             return carRepository.save(c);
         }else{
-            Optional<Car> caux=carRepository.getCar(c.getId());
+            Optional<Car> caux=carRepository.getCar(c.getIdCar());
             if(caux.isEmpty()){
                 return carRepository.save(c);
             }else{

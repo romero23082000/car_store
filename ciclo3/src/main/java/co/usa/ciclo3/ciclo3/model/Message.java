@@ -3,36 +3,34 @@ package co.usa.ciclo3.ciclo3.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "message")
 public class Message implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idMessage;
     private String text;
     @ManyToOne
     @JoinColumn(name = "idCar")
-    @JsonIgnoreProperties({"car","message","reservation"})
+    @JsonIgnoreProperties({"messages","reservations"})
     private Car car;
 
     @ManyToOne
     @JoinColumn(name = "idClient")
-    @JsonIgnoreProperties({"car","messages","reservation"})
+    @JsonIgnoreProperties({"messages","reservations"})
     private Client client;
 
 
-    public Integer getId() {
-        return id;
+    public Integer getIdMessage() {
+        return idMessage;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdMessage(Integer idMessage) {
+        this.idMessage = idMessage;
     }
 
     public String getText() {

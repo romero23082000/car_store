@@ -23,10 +23,10 @@ public class GamaService implements Serializable {
         return gamaRepository.getGama(id);
     }
     public Gama save(Gama g){
-        if(g.getId()==null){
+        if(g.getIdGama()==null){
             return gamaRepository.save(g);
         }else{
-            Optional<Gama> gaux=gamaRepository.getGama(g.getId());
+            Optional<Gama> gaux=gamaRepository.getGama(g.getIdGama());
             if(gaux.isEmpty()){
                 return gamaRepository.save(g);
             }else{

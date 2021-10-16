@@ -23,8 +23,8 @@ public class GamaController {
         return gamaService.getAll();
     }
     @GetMapping("/{id}")
-    public Optional<Gama> getCar(@PathVariable("id")int id){
-        return gamaService.getGama(id);
+    public Optional<Gama> getGama(@PathVariable("id")int idGama){
+        return gamaService.getGama(idGama);
     }
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)

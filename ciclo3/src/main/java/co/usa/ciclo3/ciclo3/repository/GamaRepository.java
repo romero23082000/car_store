@@ -18,8 +18,8 @@ public class GamaRepository implements Serializable {
     public List<Gama> getAll(){
         return (List<Gama>) gamaCrudRepository.findAll();
     }
-    public Optional<Gama> getGama(int id){
-        return gamaCrudRepository.findById(id);
+    public Optional<Gama> getGama(int idGama){
+        return gamaCrudRepository.findById(idGama);
     }
     public Gama save(Gama g){
         return gamaCrudRepository.save(g);
