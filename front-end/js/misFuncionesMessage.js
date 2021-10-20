@@ -1,65 +1,56 @@
+function obtenerItemsMessage() {
+    $.ajax({
+        dataType: 'json',
+        url: 'http://localhost:80/api/Message/all',
+        type: 'GET',
+        success: function (respuesta) {
+            console.log(respuesta)
+            pintarRespuesta(respuesta)
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+        }
+    });
+}
+
+function pintarRespuesta(respuesta) {
+
+    let myTable = "<table>";
+    for (i = 0; i < respuesta.length; i++) {
+        myTable += "<tr>";
+        myTable += "<td>" + respuesta[i].messageText + "</td>";
+        myTable += "</tr>";
+    }
+    myTable += "</table>";
+    $("#resultado1").html(myTable);
+}
+
 function registroMessage() {
     var elemento = {
-        id: $("#idMessage").val(),
-        messagetext: $("#messagetext").val(),
-
+        messageText: $("#messageText").val(),
     }
-
     var dataTosend = JSON.stringify(elemento);
     // JSON = JavaScript Object Notation
-
     $.ajax({
-
-        dataType: 'json',
-        data: elemento,
-        url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/message/message',
+        dataType: 'JSON',
+        data: dataTosend,
+        url: 'http://localhost:80/api/Message/save',
         type: 'POST',
-        //contentType:'application/json',
+        contentType: 'application/json; charset=utf-8',
         success: function (response) {
-
             console.log(response);
+            console.log("Se guardo correctamente");
+            alert("Se guardo correctamente");
+            window.location.reload()
         },
-
         error: function (jqXHR, textStatus, errorThrown) {
-
+            window.location.reload()
+            alert("No se guardo correctamente");
         }
-
-
     });
 
 }
 
-function obtenerItemsMessage() {
 
-    $.ajax({
-
-        dataType: 'json',
-        url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/message/message',
-        type: 'GET',
-
-        success: function (response) {
-
-            var registrosMessage = response.items;
-
-            for (i = 0; i < registrosMessage.length; i++) {
-
-                $("#registrosMessage").append("<tr>");
-                $("#registrosMessage").append("<td>" + registrosMessage[i].id + "</td>");
-                $("#registrosMessage").append("<td>" + registrosMessage[i].messagetext + "</td>");
-                $("#registrosMessage").append('<td> <button class="btn btn-danger" onclick="borrarMessage(' + registrosMessage[i].id + ')">DELETE</button>' + '</td>');
-                $("#registrosMessage").append('<td> <button class="btn btn-info" onclick="obtenerRegistroEspecificoMessage(' + registrosMessage[i].id + ')">GET</button>' + '</td>');
-                $("#registrosMessage").append("</tr>");
-
-            }
-        },
-
-        error: function (jqXHR, textStatus, errorThrown) {
-
-        }
-
-    });
-
-}
 
 function borrarMessage(idElemento) {
 

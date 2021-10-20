@@ -1,54 +1,69 @@
 /**
  * script de JavaScript para el formulario de la tabla Car
  */
+function traerInformacionCategorias() {
+    $.ajax({
+        url: 'http://localhost:80/api/Car/all',
+        dataType: 'JSON',
+        type: 'GET',
+        success: function (respuesta) {
+            console.log(respuesta)
+            pintarRespuesta(respuesta)
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+        }
+    });
+}
 
-function insertarRegistroCar() {
+function pintarRespuesta(respuesta) {
+
+    let myTable = "<table>";
+    for (i = 0; i < respuesta.length; i++) {
+        myTable += "<tr>";
+        myTable += "<td>" + respuesta[i].brand + "</td>";
+        myTable += "<td>" + respuesta[i].name + "</td>";
+        myTable += "<td>" + respuesta[i].year + "</td>";
+        myTable += "<td>" + respuesta[i].description + "</td>";
+        myTable += "</tr>";
+    }
+    myTable += "</table>";
+    $("#resultado1").html(myTable);
+}
+
+
+function guardarInformacionCategorias() {
     var elemento = {
-        id: $("#idCar").val(),
-        brand: $("#brand").val(),
-        model: $("#model").val(),
-        category_id: $("#category_id").val()
+        brand: $("#Cbrand").val(),
+        name: $("#Cname").val(),
+        year: $("#Cyear").val(),
+        description: $("#Cdescription").val()
     }
     var dataTosend = JSON.stringify(elemento);
     // JSON = JavaScript Object Notation
     $.ajax({
         dataType: 'json',
-        data: elemento,
-        url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/car/car',
+        contentType: "application/json; charset=utf-8",
+        data: dataTosend,
+        url: 'http://localhost:80/api/Car/save',
         type: 'POST',
-        //contentType:'application/json',
         success: function (response) {
-            alert("exitoso")
             console.log(response);
+            console.log("Se guardo correctamente");
+            alert("Se guardo correctamente");
+            window.location.reload()
+
         },
+
         error: function (jqXHR, textStatus, errorThrown) {
+            window.location.reload()
+            alert("No se guardo correctamente");
+
+
         }
     });
 }
 
-function obtenerRegistrosCar() {
-    $.ajax({
-        dataType: 'json',
-        url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/car/car',
-        type: 'GET',
-        success: function (response) {
-            var registrosCar = response.items;
-            for (i = 0; i < registrosCar.length; i++) {
-                $("#registrosCar").append("<tr>");
-                $("#registrosCar").append("<td>" + registrosCar[i].id + "</td>");
-                $("#registrosCar").append("<td>" + registrosCar[i].brand + "</td>");
-                $("#registrosCar").append("<td>" + registrosCar[i].model + "</td>");
-                $("#registrosCar").append("<td>" + registrosCar[i].category_id + "</td>");
-                $("#registrosCar").append('<td><button class="btn btn-danger" onclick="borrarRegistroCar(' + registrosCar[i].id + ')">DELETE</button>' + '</td>');
-                $("#registrosCar").append('<td><button class="btn btn-info" onclick="obtenerRegistroEspecificoCar(' + registrosCar[i].id + ')">GET</button>' + '</td>');
-                $("#registrosCar").append("</tr>");
-            }
-            //$("#miResultado").append(response.items[0].brand,response.items[0].model);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-        }
-    });
-}
+
 
 function borrarRegistroCar(idElemento) {
     var elemento = {

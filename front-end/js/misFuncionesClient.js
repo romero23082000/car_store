@@ -1,68 +1,64 @@
+function obtenerClient() {
+    $.ajax({
+        dataType: 'json',
+        url: 'http://localhost:80/api/Client/all',
+        type: 'GET',
+        success: function (respuesta) {
+            console.log(respuesta)
+            pintarRespuesta(respuesta)
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+        }
+    });
+}
+
+function pintarRespuesta(respuesta) {
+
+    let myTable = "<table>";
+    for (i = 0; i < respuesta.length; i++) {
+        myTable += "<tr>";
+        myTable += "<td>" + respuesta[i].email + "</td>";
+        myTable += "<td>" + respuesta[i].password + "</td>";
+        myTable += "<td>" + respuesta[i].name + "</td>";
+        myTable += "<td>" + respuesta[i].age + "</td>";
+        myTable += "</tr>";
+    }
+    myTable += "</table>";
+    $("#resultado1").html(myTable);
+}
+
 function registroClient() {
     var elemento = {
-        id: $("#idClient").val(),
-        name: $("#name").val(),
-        email: $("#email").val(),
-        age: $("#age").val()
+        name: $("#CliName").val(),
+        email: $("#CliEmail").val(),
+        age: $("#CliAge").val(),
+        password: $("#CliPassword").val()
     }
 
     var dataTosend = JSON.stringify(elemento);
     // JSON = JavaScript Object Notation
 
     $.ajax({
-
-        dataType: 'json',
-        data: elemento,
-        url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/client/client',
+        dataType: 'JSON',
+        data: dataTosend,
+        url: 'http://localhost:80/api/Client/save',
         type: 'POST',
+        contentType: "application/json; charset=utf-8",
         //contentType:'application/json',
         success: function (response) {
-
             console.log(response);
+            console.log("Se guardo correctamente");
+            alert("Se guardo correctamente");
+            window.location.reload()
         },
-
         error: function (jqXHR, textStatus, errorThrown) {
-
+            window.location.reload()
+            alert("No se guardo correctamente");
         }
-
-
     });
-
 }
 
-function obtenerItemsClient() {
 
-    $.ajax({
-
-        dataType: 'json',
-        url: 'https://g7be2fcfb5932c8-db202109261658.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/client/client',
-        type: 'GET',
-
-        success: function (response) {
-
-            var registrosClient = response.items;
-
-            for (i = 0; i < registrosClient.length; i++) {
-
-                $("#registrosClient").append("<tr>");
-                $("#registrosClient").append("<td>" + registrosClient[i].id + "</td>");
-                $("#registrosClient").append("<td>" + registrosClient[i].name + "</td>");
-                $("#registrosClient").append("<td>" + registrosClient[i].email + "</td>");
-                $("#registrosClient").append("<td>" + registrosClient[i].age + "</td>");
-                $("#registrosClient").append('<td> <button class="btn btn-danger" onclick="borrarRegistroClient(' + registrosClient[i].id + ')">DELETE</button>' + '</td>');
-                $("#registrosClient").append('<td> <button class="btn btn-info" onclick="obtenerRegistroEspecificoClient(' + registrosClient[i].id + ')">GET</button>' + '</td>');
-                $("#registrosClient").append("</tr>");
-
-            }
-        },
-
-        error: function (jqXHR, textStatus, errorThrown) {
-
-        }
-
-    });
-
-}
 
 function borrarRegistroClient(idElemento) {
 
