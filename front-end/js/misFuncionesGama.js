@@ -1,6 +1,6 @@
 function traerInformacionCategorias() {
   $.ajax({
-    url: "http://localhost:80/api/Gama/all",
+    url: "http://129.151.117.222:80/api/Gama/all",
     type: "GET",
     datatype: "JSON",
     success: function (respuesta) {
@@ -20,7 +20,7 @@ function pintarRespuesta(respuesta) {
     myTable += "</tr>";
   }
   myTable += "</table>";
-  $("#resultado1").html(myTable);
+  $("#listarGamas").html(myTable);
 }
 
 function guardarInformacionCategorias() {
@@ -35,7 +35,7 @@ function guardarInformacionCategorias() {
     dataType: 'JSON',
     data: JSON.stringify(var2),
 
-    url: "http://localhost:80/api/Gama/save",
+    url: "http://129.151.117.222:80/api/Gama/save",
 
 
     success: function (response) {

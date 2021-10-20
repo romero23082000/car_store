@@ -1,7 +1,7 @@
 function obtenerItemsMessage() {
     $.ajax({
         dataType: 'json',
-        url: 'http://localhost:80/api/Message/all',
+        url: 'http://129.151.117.222:80/api/Message/all',
         type: 'GET',
         success: function (respuesta) {
             console.log(respuesta)
@@ -21,7 +21,7 @@ function pintarRespuesta(respuesta) {
         myTable += "</tr>";
     }
     myTable += "</table>";
-    $("#resultado1").html(myTable);
+    $("#listarMessage").html(myTable);
 }
 
 function registroMessage() {
@@ -33,7 +33,7 @@ function registroMessage() {
     $.ajax({
         dataType: 'JSON',
         data: dataTosend,
-        url: 'http://localhost:80/api/Message/save',
+        url: 'http://129.151.117.222:80/api/Message/save',
         type: 'POST',
         contentType: 'application/json; charset=utf-8',
         success: function (response) {

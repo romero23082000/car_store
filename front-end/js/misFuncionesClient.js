@@ -1,7 +1,7 @@
 function obtenerClient() {
     $.ajax({
         dataType: 'json',
-        url: 'http://localhost:80/api/Client/all',
+        url: 'http://129.151.117.222:80/api/Client/all',
         type: 'GET',
         success: function (respuesta) {
             console.log(respuesta)
@@ -17,14 +17,14 @@ function pintarRespuesta(respuesta) {
     let myTable = "<table>";
     for (i = 0; i < respuesta.length; i++) {
         myTable += "<tr>";
-        myTable += "<td>" + respuesta[i].email + "</td>";
-        myTable += "<td>" + respuesta[i].password + "</td>";
         myTable += "<td>" + respuesta[i].name + "</td>";
         myTable += "<td>" + respuesta[i].age + "</td>";
+        myTable += "<td>" + respuesta[i].email + "</td>";
+        myTable += "<td>" + respuesta[i].password + "</td>";
         myTable += "</tr>";
     }
     myTable += "</table>";
-    $("#resultado1").html(myTable);
+    $("#listarClientes").html(myTable);
 }
 
 function registroClient() {
@@ -41,7 +41,7 @@ function registroClient() {
     $.ajax({
         dataType: 'JSON',
         data: dataTosend,
-        url: 'http://localhost:80/api/Client/save',
+        url: 'http://129.151.117.222:80/api/Client/save',
         type: 'POST',
         contentType: "application/json; charset=utf-8",
         //contentType:'application/json',

@@ -3,7 +3,7 @@
  */
 function traerInformacionCategorias() {
     $.ajax({
-        url: 'http://localhost:80/api/Car/all',
+        url: 'http://129.151.117.222:80/api/Car/all',
         dataType: 'JSON',
         type: 'GET',
         success: function (respuesta) {
@@ -27,7 +27,7 @@ function pintarRespuesta(respuesta) {
         myTable += "</tr>";
     }
     myTable += "</table>";
-    $("#resultado1").html(myTable);
+    $("#listarCarros").html(myTable);
 }
 
 
@@ -44,7 +44,7 @@ function guardarInformacionCategorias() {
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
         data: dataTosend,
-        url: 'http://localhost:80/api/Car/save',
+        url: 'http://129.151.117.222:80/api/Car/save',
         type: 'POST',
         success: function (response) {
             console.log(response);
