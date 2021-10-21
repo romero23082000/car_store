@@ -1,6 +1,7 @@
 package co.usa.ciclo3.ciclo3.service;
 
 import co.usa.ciclo3.ciclo3.model.Car;
+import co.usa.ciclo3.ciclo3.model.Gama;
 import co.usa.ciclo3.ciclo3.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,34 @@ public class CarService implements Serializable {
                 return c;
             }
         }
+    }
+    public Car update(Car car){
+        if(car.getIdCar()!=null){
+            Optional<Car>c=carRepository.getCar(car.getIdCar());
+            if(!c.isEmpty()){
+                if(car.getName()!=null){
+                    c.get().setDescription(car.getName());
+                }
+                if(car.getBrand()!=null){
+                    c.get().setName(car.getBrand());
+                }
+                if(car.getYear()!=null){
+                    c.get().setYear(car.getYear());
+                }
+                if(car.getDescription()!=null){
+                    c.get().setDescription(car.getDescription());
+                }
+                return carRepository.save(c.get());
+            }
+        }
+        return car;
+    }
+    public boolean deleteGama(int idCar){
+        Boolean d=getCar(idCar).map(car -> {
+            carRepository.delete(car);
+            return true;
+        }).orElse(false);
+        return d;
     }
 
 }

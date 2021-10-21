@@ -24,4 +24,7 @@ public class GamaRepository implements Serializable {
     public Gama save(Gama g){
         return gamaCrudRepository.save(g);
     }
+    public void delete(Gama gama){
+        gamaCrudRepository.delete(gama);
+    }
 }

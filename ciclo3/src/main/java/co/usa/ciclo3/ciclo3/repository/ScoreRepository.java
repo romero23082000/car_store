@@ -1,5 +1,6 @@
 package co.usa.ciclo3.ciclo3.repository;
 
+import co.usa.ciclo3.ciclo3.model.Gama;
 import co.usa.ciclo3.ciclo3.model.Message;
 import co.usa.ciclo3.ciclo3.model.Score;
 import co.usa.ciclo3.ciclo3.repository.crud.ScoreCrudRepository;
@@ -26,5 +27,8 @@ public class ScoreRepository {
 
     public Score save(Score calificacion){
         return scoreCrudRepository.save(calificacion);
+    }
+    public void delete(Score score){
+        scoreCrudRepository.delete(score);
     }
 }
