@@ -1,6 +1,7 @@
 package co.usa.ciclo3.ciclo3.service;
 
 
+import co.usa.ciclo3.ciclo3.model.Gama;
 import co.usa.ciclo3.ciclo3.model.Score;
 import co.usa.ciclo3.ciclo3.repository.ScoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,31 @@ public class ScoreService {
             }
         }
 
+    }
+
+    public Score update(Score score){
+        if(score.getIdScore()!=null){
+            Optional<Score>s=scoreRepository.getScore(score.getIdScore());
+            if(!s.isEmpty()){
+                if(score.getMessageText()!=null){
+                    s.get().setMessageText(score.getMessageText());
+                }
+                if(score.getStars()!=null){
+                    s.get().setStars(score.getStars());
+                }
+                return scoreRepository.save(s.get());
+            }
+        }
+        return score;
+    }
+
+
+    public boolean deleteScore(int idScore){
+        Boolean d=getScore(idScore).map(score -> {
+            scoreRepository.delete(score);
+            return true;
+        }).orElse(false);
+        return d;
     }
 
 }

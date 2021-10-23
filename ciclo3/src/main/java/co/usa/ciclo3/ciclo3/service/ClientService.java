@@ -60,7 +60,7 @@ public class ClientService {
         }
         return client;
     }
-    public boolean deleteGama(int idClient){
+    public boolean deleteClient(int idClient){
         Boolean d=getClient(idClient).map(client -> {
             clientRepository.delete(client);
             return true;

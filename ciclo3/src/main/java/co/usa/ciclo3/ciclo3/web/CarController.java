@@ -2,6 +2,7 @@ package co.usa.ciclo3.ciclo3.web;
 
 
 import co.usa.ciclo3.ciclo3.model.Car;
+import co.usa.ciclo3.ciclo3.model.Gama;
 import co.usa.ciclo3.ciclo3.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,5 +33,17 @@ public class CarController {
         return carService.save(c);
     }
 
+
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Car update(@RequestBody Car car) {
+        return carService.update(car);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("id") int carId) {
+        return carService.deleteCar(carId);
+    }
 
 }

@@ -1,5 +1,6 @@
 package co.usa.ciclo3.ciclo3.service;
 
+import co.usa.ciclo3.ciclo3.model.Gama;
 import co.usa.ciclo3.ciclo3.model.Message;
 import co.usa.ciclo3.ciclo3.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,26 @@ public class MessageService implements Serializable {
                 return m;
             }
         }
+    }
+    public Message update(Message message){
+        if(message.getIdMessage()!=null){
+            Optional<Message>m=messageRepository.getMessage(message.getIdMessage());
+            if(!m.isEmpty()){
+                if(message.getMessageText()!=null){
+                    m.get().setMessageText(message.getMessageText());
+                }
+
+                return messageRepository.save(m.get());
+            }
+        }
+        return message;
+    }
+
+    public boolean deleteMessage(int idMessage){
+        Boolean d=getMessage(idMessage).map(message -> {
+            messageRepository.delete(message);
+            return true;
+        }).orElse(false);
+        return d;
     }
 }

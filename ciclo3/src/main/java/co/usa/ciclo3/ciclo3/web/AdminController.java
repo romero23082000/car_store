@@ -1,8 +1,8 @@
 package co.usa.ciclo3.ciclo3.web;
 
+import co.usa.ciclo3.ciclo3.model.Admin;
 import co.usa.ciclo3.ciclo3.model.Gama;
-import co.usa.ciclo3.ciclo3.model.Message;
-import co.usa.ciclo3.ciclo3.service.MessageService;
+import co.usa.ciclo3.ciclo3.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,36 +11,34 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/Message")
+@RequestMapping("api/Admin")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST,RequestMethod.PUT, RequestMethod.DELETE})
-public class MessageController {
+public class AdminController {
     @Autowired
-    private MessageService messageService;
-
+    private AdminService adminService;
     @GetMapping("/all")
-    public List<Message> getMessage(){
-        return messageService.getAll();
+    public List<Admin> getAdmins(){
+        return adminService.getAll();
     }
     @GetMapping("/{id}")
-    public Optional<Message> getMessage(@PathVariable("id")int id){
-        return messageService.getMessage(id);
+    public Optional<Admin> getAdmin(@PathVariable("id")int id){
+        return adminService.getAdmin(id);
     }
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Message save(@RequestBody Message m){
-        return messageService.save(m);
+    public Admin save(@RequestBody Admin admin){
+        return adminService.save(admin);
     }
-
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Message update(@RequestBody Message message) {
-        return messageService.update(message);
+    public Admin update(@RequestBody Admin admin) {
+        return adminService.update(admin);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable("id") int messageId) {
-        return messageService.deleteMessage(messageId);
+    public boolean delete(@PathVariable("id") int adminId) {
+        return adminService.deleteAdmin(adminId);
     }
 }

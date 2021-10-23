@@ -1,5 +1,6 @@
 package co.usa.ciclo3.ciclo3.service;
 
+import co.usa.ciclo3.ciclo3.model.Gama;
 import co.usa.ciclo3.ciclo3.model.Reservation;
 import co.usa.ciclo3.ciclo3.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,29 @@ public class ReservationService implements Serializable {
                 return r;
             }
         }
+    }
+
+    public Reservation update(Reservation reservation){
+        if(reservation.getIdReservation()!=null){
+            Optional<Reservation>r=reservationRepository.getReservation(reservation.getIdReservation());
+            if(!r.isEmpty()){
+                if(reservation.getStartDate()!=null){
+                    r.get().setStartDate(reservation.getStartDate());
+                }
+                if(reservation.getDevolutionDate()!=null){
+                    r.get().setDevolutionDate(reservation.getDevolutionDate());
+                }
+                return reservationRepository.save(r.get());
+            }
+        }
+        return reservation;
+    }
+
+    public boolean deleteReservation(int idReservation){
+        Boolean d=getReservation(idReservation).map(reservation -> {
+            reservationRepository.delete(reservation);
+            return true;
+        }).orElse(false);
+        return d;
     }
 }

@@ -38,10 +38,10 @@ public class CarService implements Serializable {
             Optional<Car>c=carRepository.getCar(car.getIdCar());
             if(!c.isEmpty()){
                 if(car.getName()!=null){
-                    c.get().setDescription(car.getName());
+                    c.get().setName(car.getName());
                 }
                 if(car.getBrand()!=null){
-                    c.get().setName(car.getBrand());
+                    c.get().setBrand(car.getBrand());
                 }
                 if(car.getYear()!=null){
                     c.get().setYear(car.getYear());
@@ -54,7 +54,7 @@ public class CarService implements Serializable {
         }
         return car;
     }
-    public boolean deleteGama(int idCar){
+    public boolean deleteCar(int idCar){
         Boolean d=getCar(idCar).map(car -> {
             carRepository.delete(car);
             return true;
