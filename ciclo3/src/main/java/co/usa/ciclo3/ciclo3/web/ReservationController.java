@@ -1,8 +1,6 @@
 package co.usa.ciclo3.ciclo3.web;
 
-import co.usa.ciclo3.ciclo3.model.Gama;
-import co.usa.ciclo3.ciclo3.model.Message;
-import co.usa.ciclo3.ciclo3.model.Reservation;
+import co.usa.ciclo3.ciclo3.model.*;
 import co.usa.ciclo3.ciclo3.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,4 +42,19 @@ public class ReservationController {
     public boolean delete(@PathVariable("id") int reservationId) {
         return reservationService.deleteReservation(reservationId);
     }
+    @GetMapping("/report-status")
+    public StatusReservas getReservas(){
+        return reservationService.getRepStatusRes();
+    }
+
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+    public List<Reservation> getReservasTiempo (@PathVariable("dateOne")String dateOne, @PathVariable("dateTwo")String dateTwo ){
+        return reservationService.reporteTiempoServicio(dateOne, dateTwo);
+    }
+
+    @GetMapping("/report-clients")
+    public List<ContadorClientes> getClientes(){
+        return reservationService.reporteClientesServicio();
+    }
+
 }
