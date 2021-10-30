@@ -49,6 +49,9 @@ public class CarService implements Serializable {
                 if(car.getDescription()!=null){
                     c.get().setDescription(car.getDescription());
                 }
+                if(car.getGama()!=null){
+                    c.get().setGama(car.getGama());
+                }
                 return carRepository.save(c.get());
             }
         }
